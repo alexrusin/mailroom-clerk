@@ -3755,8 +3755,11 @@ window.Vue = __WEBPACK_IMPORTED_MODULE_0_vue___default.a;
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
 window.axios = __WEBPACK_IMPORTED_MODULE_2_axios___default.a;
+window.apiKey = '';
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Accept'] = 'application/json';
+window.axios.defaults.headers.common['Content-type'] = 'application/json';
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -3795,7 +3798,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.5.16
+ * Vue.js v2.5.17
  * (c) 2014-2018 Evan You
  * Released under the MIT License.
  */
@@ -8884,7 +8887,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.5.16';
+Vue.version = '2.5.17';
 
 /*  */
 
@@ -28676,7 +28679,7 @@ var routes = [{
 	component: __webpack_require__(39)
 }, {
 	path: '/about',
-	component: __webpack_require__(42)
+	component: __webpack_require__(56)
 }];
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
@@ -28710,7 +28713,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\Home.vue"
+Component.options.__file = "assets\\js\\views\\Home.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -28719,9 +28722,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-11c5acec", Component.options)
+    hotAPI.createRecord("data-v-3fef7695", Component.options)
   } else {
-    hotAPI.reload("data-v-11c5acec", Component.options)
+    hotAPI.reload("data-v-3fef7695", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -28737,9 +28740,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__RouteSummary_vue__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__RouteSummary_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__RouteSummary_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__routes__ = __webpack_require__(38);
 //
 //
 //
@@ -28754,7 +28757,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { RouteSummary: __WEBPACK_IMPORTED_MODULE_0__RouteSummary_vue___default.a, router: __WEBPACK_IMPORTED_MODULE_1__routes__["a" /* default */] },
+    created: function created() {
+        this.sendRequest();
+    },
+    data: function data() {
+        return {
+            routeComponents: [],
+            message: ''
+        };
+    },
+
+
+    methods: {
+        sendRequest: function sendRequest() {
+            var _this = this;
+
+            axios.get('https://mailroom.myapi.website/api/hooks', {
+                headers: {
+                    'Authorization': 'Bearer ' + window.apiKey
+                }
+            }).then(function (response) {
+                _this.routeComponents = response.data.data;
+                _this.message = '';
+            }).catch(function (error) {
+                _this.message = 'Cant\'t retreieve routes at this time.  Please verify your credentials by entering your API Key';
+            });
+        }
+    }
+
+});
 
 /***/ }),
 /* 41 */
@@ -28764,49 +28799,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-          _c("div", { staticClass: "panel panel-default" }, [
-            _c("div", { staticClass: "panel-heading" }, [_vm._v("Home")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    I'm an home component!\n                "
-              )
-            ])
-          ])
-        ])
-      ])
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-md-10 col-md-offset-1" },
+        [
+          _vm.message
+            ? _c("p", { domProps: { innerHTML: _vm._s(_vm.message) } })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.routeComponents, function(route) {
+            return _c(
+              "div",
+              [_c("route-summary", { attrs: { data: route } })],
+              1
+            )
+          })
+        ],
+        2
+      )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-11c5acec", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-3fef7695", module.exports)
   }
 }
 
 /***/ }),
-/* 42 */
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(10)
 /* script */
-var __vue_script__ = __webpack_require__(43)
+var __vue_script__ = __webpack_require__(57)
 /* template */
-var __vue_template__ = __webpack_require__(44)
+var __vue_template__ = __webpack_require__(58)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -28823,7 +28877,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\About.vue"
+Component.options.__file = "assets\\js\\views\\Connect.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -28832,9 +28886,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5b755950", Component.options)
+    hotAPI.createRecord("data-v-699539b8", Component.options)
   } else {
-    hotAPI.reload("data-v-5b755950", Component.options)
+    hotAPI.reload("data-v-699539b8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -28845,7 +28899,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28866,55 +28920,237 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    created: function created() {
+        this.apiKey = window.apiKey;
+        if (this.apiKey) {
+            this.sendRequest();
+        }
+    },
+    data: function data() {
+        return {
+            apiKey: '',
+            message: ''
+        };
+    },
+
+
+    methods: {
+        saveKey: function saveKey() {
+            window.apiKey = this.apiKey;
+            this.sendRequest();
+        },
+        sendRequest: function sendRequest() {
+            var _this = this;
+
+            axios.get('https://mailroom.myapi.website/api/user', {
+                headers: {
+                    'Authorization': 'Bearer ' + this.apiKey
+                }
+            }).then(function (response) {
+                var name = response.data.name;
+                _this.message = 'Hello ' + name + '.  You successfully connected.';
+            }).catch(function (error) {
+                _this.message = 'Sorry, there was an error connecting to the server';
+            });
+        }
+    }
+});
 
 /***/ }),
-/* 44 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-          _c("div", { staticClass: "panel panel-default" }, [
-            _c("div", { staticClass: "panel-heading" }, [_vm._v("About")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    I am about component\n                "
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-10 col-md-offset-1" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-heading" }, [
+            _vm._v("Connect to Mailroom Server")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "panel-body" }, [
+            _c("form", { staticClass: "form-inline" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.apiKey,
+                      expression: "apiKey"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "apiKey",
+                    placeholder: "Enter Api Key"
+                  },
+                  domProps: { value: _vm.apiKey },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.apiKey = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.saveKey }
+                },
+                [_vm._v("Connect")]
               )
-            ])
+            ]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _vm.message
+              ? _c("p", [_c("mark", [_vm._v(_vm._s(_vm.message))])])
+              : _vm._e()
           ])
         ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5b755950", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-699539b8", module.exports)
   }
 }
 
 /***/ }),
-/* 45 */
-/***/ (function(module, exports) {
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
 
-// removed by extract-text-webpack-plugin
+var disposed = false
+var normalizeComponent = __webpack_require__(10)
+/* script */
+var __vue_script__ = __webpack_require__(60)
+/* template */
+var __vue_template__ = __webpack_require__(61)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "assets\\js\\views\\RouteSummary.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e4aa645a", Component.options)
+  } else {
+    hotAPI.reload("data-v-e4aa645a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['data'],
+
+    data: function data() {
+        return {};
+    }
+});
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-md-10 col-md-offset-1" }, [
+    _c("div", { staticClass: "panel panel-default" }, [
+      _c("div", { staticClass: "panel-heading" }, [
+        _c("strong", [_vm._v("Method")]),
+        _vm._v(_vm._s(_vm.data.method) + "\n            "),
+        _c("strong", [_vm._v("Hook Path:")]),
+        _vm._v(" " + _vm._s(_vm.data.path) + "\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-body" }, [
+        _vm._v("\n           Or maybe not mine\n        ")
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e4aa645a", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

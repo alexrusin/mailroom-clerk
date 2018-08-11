@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="./css/app.css">
+        <link rel="stylesheet" type="text/css" href="./public/css/app.css">
         <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
         <title>Mailroom Clerk</title>
@@ -20,17 +20,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="#">Mailroom Clerk</a>
+                  <router-link to="/" exact>
+                    <a class="navbar-brand">Mailroom Clerk</a>
+                  </router-link>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                   <ul class="nav navbar-nav">
                      <router-link tag="li" to="/" exact>
-                       <a>Home</a>
+                       <a>Routes</a>
                      </router-link>
                      <router-link tag="li" to="/about">
-                       <a>About</a>
+                       <a>Credentials</a>
                      </router-link>
-                    <li><a href="#contact">Contact</a></li>
                   </ul>
                 </div><!--/.nav-collapse -->
               </div>
@@ -40,7 +41,7 @@
             </div>
         </div>
         <script>
-          require('./js/app.js');
+          require('./public/js/app.js');
           require('./renderer.js');
         </script>
     </body>
