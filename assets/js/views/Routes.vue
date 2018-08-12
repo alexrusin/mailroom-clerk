@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <p v-if="message" v-html="message"></p>
-               <div v-for="route in routeComponents">
-                    <route-summary :data="route"></route-summary>
-               </div>
+        <div class="row" v-if="message">
+            <div class="col-md-12 col-md-offset-1">
+                <p v-html="message"></p>
             </div>
         </div>
+       <div v-for="route in routeComponents">
+            <route-summary :data="route"></route-summary>
+       </div>
     </div>
 </template>
 
@@ -28,7 +28,7 @@
 
         methods: {
             sendRequest() {
-                 axios.get('https://mailroom.myapi.website/api/hooks', {
+                 axios.get(window.targetUrl + '/api/hooks', {
                     headers: {
                         'Authorization': `Bearer ${window.apiKey}`,
                     }

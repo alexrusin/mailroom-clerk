@@ -4,13 +4,19 @@ import VueRouter from 'vue-router';
 let routes = [
 	{
 		path: '/',
-		component: require('./views/Home')
+		component: require('./views/Connect')
 	},
 
 	{
-		path: '/about',
-		component: require('./views/Connect')
+		path: '/routes',
+		component: require('./views/Routes')
+	},
+
+	{
+		path: '/routes/:id',
+		component: require('./views/SingleRoute')
 	}
+
 ];
 
 export default new VueRouter({

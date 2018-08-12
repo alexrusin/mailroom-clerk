@@ -8359,3 +8359,12 @@ body {
   text-align: center;
 }
 
+.single-route-body {
+  text-align: left;
+  padding: 20px 30px 20px 30px;
+}
+
+.wrap {
+  overflow-wrap: break-word;
+}
+

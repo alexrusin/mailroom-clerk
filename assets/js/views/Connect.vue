@@ -7,9 +7,9 @@
 
                     <div class="panel-body">
                         <form class="form-inline">
-                          <div class="form-group">
-                            <input type="text" class="form-control" id="apiKey" placeholder="Enter Api Key" v-model="apiKey">
-                          </div>
+                        
+                            <input type="text" class="form-control input-key-width" id="apiKey" placeholder="Enter Api Key" v-model="apiKey">
+                         
                            <button type="button" class="btn btn-primary" @click="saveKey">Connect</button>
                         </form>
                         <br>
@@ -45,7 +45,7 @@
             },
 
             sendRequest() {
-                axios.get('https://mailroom.myapi.website/api/user', {
+                axios.get(window.targetUrl + '/api/user', {
                     headers: {
                         'Authorization': `Bearer ${this.apiKey}`,
                     }
@@ -59,3 +59,9 @@
         }
     }
 </script>
+
+<style>
+    .input-key-width {
+        width: 60% !important;
+    }
+</style>
