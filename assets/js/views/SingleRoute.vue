@@ -46,9 +46,9 @@
 		                        <div class="col-md-12">
 		                            <div class="text-left">
 		                                <form class="form-inline">
-				                          
+
 				                            <input type="text" class="form-control input-width" id="sendToRoute" placeholder="Send to route" v-model="sendToRoute">
-				                         
+
 				                           <button type="button" class="btn btn-primary" @click="makeRequest">Send Request</button>
 				                        </form>
 		                            </div>
@@ -62,7 +62,7 @@
 		 <div class="container">
 		 	<div class="row">
 		 		<div class="col-md-10 col-md-offset-1">
-		 			<div class="panel panel-default" v-if="requestResponse">
+		 			<div class="panel panel-default" v-if="requestResponse || responseStatus">
 	                    <div class="panel-heading">
 	                    	<p><strong>Response</strong></p>
 	                    	<p v-if="responseStatus">
@@ -71,7 +71,7 @@
 	                    </div>
 
 	                    <div class="panel-body single-route-body wrap" v-html="requestResponse">
-	                       
+
 	                    </div>
 	                </div>
 		 		</div>
@@ -92,8 +92,8 @@
             		 return this.data.method.toUpperCase();
             	} else {
             		return '';
-            	} 
-               
+            	}
+
             }
         },
 
@@ -137,12 +137,12 @@
 
 				if (this.data.query_string) {
 					sendToUrl = this.sendToRoute + '?' + this.data.query_string;
-					
+
 				} else {
 					sendToUrl = this.sendToRoute;
 				}
 
-				let payload = this.data.body ? this.data.body : null
+				let payload = this.data.body ? this.data.body : null;
 
 				axios({
 					method: method,

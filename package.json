@@ -5,8 +5,8 @@
   "description": "A client app for mailroom server",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "package-win": "electron-packager . mailroom-clerk --overwrite --asar=true --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=\"APR Solutions\" --version-string.FileDescription=CE --version-string.ProductName=\"Mailroom Clerk\"",
+    "start": "cross-env NODE_ENV=development electron .",
+    "package-win": "cross-env NODE_ENV=production electron-packager . mailroom-clerk --overwrite --asar=true --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=\"APR Solutions\" --version-string.FileDescription=CE --version-string.ProductName=\"Mailroom Clerk\"",
     "dev": "npm run development",
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
