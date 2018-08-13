@@ -142,9 +142,13 @@
 					sendToUrl = this.sendToRoute;
 				}
 
-				axios[method](sendToUrl, {
-					headers: this.data.headers,
-					body: this.data.body ? this.data.body : null
+				let payload = this.data.body ? this.data.body : null
+
+				axios({
+					method: method,
+					url: sendToUrl,
+					data: payload,
+					headers: this.data.headers
 				})
 				.then(response => {
 					this.requestResponse = response.data;
