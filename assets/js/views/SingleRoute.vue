@@ -157,7 +157,6 @@
 				.then(response => {
 					this.requestResponse = response.data;
 					this.isScriptResponse = response.data.startsWith('<script>');
-					console.log(this.isScriptResponse);
 					this.responseStatus = response.status;
 
 				})

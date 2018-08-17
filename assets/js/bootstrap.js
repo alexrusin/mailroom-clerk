@@ -20,7 +20,7 @@ window.Vue = Vue;
 Vue.use(VueRouter);
 
 
-window.apiKey = '3XLShcU93V6EDYSVhOcmqZfcsH0wZdcLYdiirQhAidSb5FN8tBaxE6EIIcQQ';
+window.apiKey = '';
 window.targetUrl = 'https://mailroom.myapi.website';
 
 window.axios = axios;

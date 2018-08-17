@@ -4089,7 +4089,7 @@ window.Vue = __WEBPACK_IMPORTED_MODULE_0_vue___default.a;
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
-window.apiKey = '3XLShcU93V6EDYSVhOcmqZfcsH0wZdcLYdiirQhAidSb5FN8tBaxE6EIIcQQ';
+window.apiKey = '';
 window.targetUrl = 'https://mailroom.myapi.website';
 
 window.axios = __WEBPACK_IMPORTED_MODULE_2_axios___default.a;
@@ -29807,7 +29807,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}).then(function (response) {
 				_this2.requestResponse = response.data;
 				_this2.isScriptResponse = response.data.startsWith('<script>');
-				console.log(_this2.isScriptResponse);
 				_this2.responseStatus = response.status;
 			}).catch(function (error) {
 				_this2.requestResponse = error.response.data;
