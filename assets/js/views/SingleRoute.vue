@@ -70,9 +70,12 @@
 	                    	</p>
 	                    </div>
 
-	                    <div class="panel-body single-route-body wrap" v-html="requestResponse">
-
+						<div v-if="isScriptResponse" class="panel-body single-route-body wrap" v-html="requestResponse">
 	                    </div>
+	                    <div v-else class="panel-body single-route-body wrap">
+							{{requestResponse}}
+	                    </div>
+
 	                </div>
 		 		</div>
 		 	</div>
@@ -104,7 +107,8 @@
 				data: {},
 				sendToRoute: '',
 				requestResponse: '',
-				responseStatus: ''
+				responseStatus: '',
+				isScriptResponse: false,
 
 			};
 		},
@@ -152,6 +156,8 @@
 				})
 				.then(response => {
 					this.requestResponse = response.data;
+					this.isScriptResponse = response.data.startsWith('<script>');
+					console.log(this.isScriptResponse);
 					this.responseStatus = response.status;
 
 				})
@@ -159,7 +165,7 @@
 					this.requestResponse = error.response.data;
 					this.responseStatus = error.response.status;
 				});
-			}
+			},
 		}
 	}
 </script>
