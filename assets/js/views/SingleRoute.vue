@@ -70,7 +70,7 @@
 	                    	</p>
 	                    </div>
 
-						<div v-if="isScriptResponse" class="panel-body single-route-body wrap" v-html="requestResponse">
+						<div v-if="isHtmlResponse" class="panel-body single-route-body wrap" v-html="requestResponse">
 	                    </div>
 	                    <div v-else class="panel-body single-route-body wrap">
 							{{requestResponse}}
@@ -111,7 +111,7 @@
 				sendToRoute: '',
 				requestResponse: '',
 				responseStatus: '',
-				isScriptResponse: false,
+				isHtmlResponse: false,
 
 			};
 		},
@@ -127,17 +127,30 @@
                 	this.data = respose.data.data;
                 	if (!this.data.url) {
                 		this.noHookDataMessage = "No data for this hook is available";
+                		return;
                 	}
+
+                	this.sendToRoute = this.$store.state.sendToRoutes[this.data.id];
                 })
                 .catch(error => {
                 	this.message = "Sorry, there was an error retrieving data";
                 });
 			},
 
+			persistSendToRoute(route, id) {
+				let data = {};
+				data.id = id;
+				data.path = route;
+
+				this.$store.commit('setRouteByKey', data);
+			},
+
 			makeRequest() {
 				if (!this.sendToRoute) {
 					return;
 				}
+
+				this.persistSendToRoute(this.sendToRoute, this.data.id);
 
 				let sendToUrl;
 				const method = this.data.method;
@@ -159,7 +172,7 @@
 				})
 				.then(response => {
 					this.requestResponse = response.data;
-					this.isScriptResponse = response.data.startsWith('<script>');
+					this.isHtmlResponse = this.htmlResponse(response.data);
 					this.responseStatus = response.status;
 
 				})
@@ -168,6 +181,11 @@
 					this.responseStatus = error.response.status;
 				});
 			},
+
+			htmlResponse(data) {
+				data = data.trim();
+				return data.startsWith('<script>') || data.startsWith('<!doctype html>') || data.startsWith('<html') || data.startsWith('<!DOCTYPE html>');
+			}
 		}
 	}
 </script>
