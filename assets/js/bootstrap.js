@@ -6,6 +6,7 @@
  */
 
 import Vue from 'vue';
+import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 
@@ -16,12 +17,11 @@ try {
 } catch (e) {}
 
 window.Vue = Vue;
+window.Vuex = Vuex;
 
 Vue.use(VueRouter);
+Vue.use(Vuex);
 
-
-window.apiKey = '';
-window.targetUrl = 'https://mailroom.myapi.website';
 
 window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

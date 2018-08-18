@@ -14,8 +14,11 @@
 <script>
     import RouteSummary from './RouteSummary.vue';
     import router from './../routes';
+    import {mapState} from 'vuex';
+
     export default {
         components: {RouteSummary, router},
+        computed: mapState(['apiKey', 'targetUrl']),
         created() {
             this.sendRequest();
         },
@@ -28,9 +31,9 @@
 
         methods: {
             sendRequest() {
-                 axios.get(window.targetUrl + '/api/hooks', {
+                 axios.get(this.targetUrl + '/api/hooks', {
                     headers: {
-                        'Authorization': `Bearer ${window.apiKey}`,
+                        'Authorization': `Bearer ${this.apiKey}`,
                     }
                   }).then(response => {
                        this.routeComponents = response.data.data;

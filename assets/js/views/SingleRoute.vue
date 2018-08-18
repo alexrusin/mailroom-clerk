@@ -84,6 +84,7 @@
 </template>
 
 <script>
+	import {mapState} from 'vuex';
 	export default {
 		created() {
 			this.sendRequest(this.$route.params.id);
@@ -97,7 +98,9 @@
             		return '';
             	}
 
-            }
+            },
+            ...mapState(['apiKey', 'targetUrl'])
+
         },
 
 		data() {
@@ -115,9 +118,9 @@
 
 		methods: {
 			sendRequest(id) {
-				axios.get(window.targetUrl + '/api/hooks/' + id, {
+				axios.get(this.targetUrl + '/api/hooks/' + id, {
                     headers: {
-                        'Authorization': `Bearer ${window.apiKey}`,
+                        'Authorization': `Bearer ${this.apiKey}`,
                     }
                 })
                 .then(respose => {

@@ -8,7 +8,7 @@
                     <div class="panel-body">
                         <form class="form-inline">
                         
-                            <input type="text" class="form-control input-key-width" id="apiKey" placeholder="Enter Api Key" v-model="apiKey">
+                            <input type="text" class="form-control input-key-width" id="apiKey" placeholder="Enter Api Key" v-model="storedKey">
                          
                            <button type="button" class="btn btn-primary" @click="saveKey">Connect</button>
                         </form>
@@ -22,32 +22,36 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex';
+
     export default {
+        computed: mapState(['apiKey', 'targetUrl']),
+
         created() {
-            this.apiKey = window.apiKey;
-            if(this.apiKey) {
+            this.storedKey = this.apiKey;
+            if(this.storedKey) {
                 this.sendRequest();
             }
         },
 
         data() {
             return {
-                apiKey: '',
+                storedKey: '',
                 message: ''
             };
         },
 
         methods: {
             saveKey() {
-                window.apiKey = this.apiKey;
+                this.$store.commit('saveApiKey', this.storedKey);
                 this.sendRequest();
 
             },
 
             sendRequest() {
-                axios.get(window.targetUrl + '/api/user', {
+                axios.get(this.targetUrl + '/api/user', {
                     headers: {
-                        'Authorization': `Bearer ${this.apiKey}`,
+                        'Authorization': `Bearer ${this.storedKey}`,
                     }
                   }).then(response =>{
                         let name = response.data.name;
