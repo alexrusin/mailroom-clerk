@@ -49,7 +49,14 @@
 
 				                            <input type="text" class="form-control input-width" id="sendToRoute" placeholder="Send to route" v-model="sendToRoute">
 
-				                           <button type="button" class="btn btn-primary" @click="makeRequest">Send Request</button>
+				                           <button type="button" class="btn btn-primary" @click="makeRequest" id="send-request">
+				                           	 	<span class="buttonText">Send Request</span>
+                								<span class="buttonLoadingImage hiddenButtonElement"></span>
+				                           </button>
+				                           <button v-if="data" type="button" class="btn btn-success" @click="syncRequest" id="sync-request">
+				                           	 	<span class="buttonText">Sync Request</span>
+                								<span class="buttonLoadingImage hiddenButtonElement"></span>
+				                           </button>
 				                        </form>
 		                            </div>
 		                        </div>
@@ -124,6 +131,7 @@
                     }
                 })
                 .then(respose => {
+                	this.enableButtons();
                 	this.data = respose.data.data;
                 	if (!this.data.url) {
                 		this.noHookDataMessage = "No data for this hook is available";
@@ -133,8 +141,18 @@
                 	this.sendToRoute = this.$store.state.sendToRoutes[this.data.id];
                 })
                 .catch(error => {
+                	this.enableButtons();
                 	this.message = "Sorry, there was an error retrieving data";
                 });
+			},
+
+			syncRequest() {
+				if (this.data.id) {
+					this.disableButtons();
+                	this.showSpinner('#sync-request');
+                	this.sendRequest(this.data.id);
+				}
+				
 			},
 
 			persistSendToRoute(route, id) {
@@ -151,6 +169,8 @@
 				}
 
 				this.persistSendToRoute(this.sendToRoute, this.data.id);
+				this.disableButtons();
+                this.showSpinner('#send-request');
 
 				let sendToUrl;
 				const method = this.data.method;
@@ -168,17 +188,27 @@
 					method: method,
 					url: sendToUrl,
 					data: payload,
-					headers: this.data.headers
+					headers: this.data.headers,
+					timeout: 5000
 				})
 				.then(response => {
 					this.requestResponse = response.data;
 					this.isHtmlResponse = this.htmlResponse(response.data);
 					this.responseStatus = response.status;
+					this.enableButtons();
 
 				})
 				.catch(error => {
-					this.requestResponse = error.response.data;
-					this.responseStatus = error.response.status;
+					if(error.response) {
+						this.requestResponse = error.response.data;
+						this.isHtmlResponse = this.htmlResponse(error.response.data);
+						this.responseStatus = error.response.status;
+					} else {
+						this.responseStatus = '';
+						this.requestResponse = `Error sending request: ${error.message}`;
+					}
+					
+					this.enableButtons();
 				});
 			},
 
