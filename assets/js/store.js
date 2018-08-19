@@ -1,7 +1,7 @@
 export default {
 
 	state: {
-		apiKey: '3XLShcU93V6EDYSVhOcmqZfcsH0wZdcLYdiirQhAidSb5FN8tBaxE6EIIcQQ',
+		apiKey: '',
 		targetUrl: 'https://mailroom.myapi.website',
 		sendToRoutes: {}
 	},
