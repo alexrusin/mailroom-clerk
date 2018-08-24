@@ -7,6 +7,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development electron .",
     "package-win": "npm run production && electron-packager . mailroom-clerk --overwrite --asar=true --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=\"APR Solutions\" --version-string.FileDescription=CE --version-string.ProductName=\"Mailroom Clerk\"",
+    "package-mac": "npm run production && electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds",
     "dev": "npm run development",
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
