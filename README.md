@@ -12,7 +12,7 @@ Create an account on [Mailroom server](https://mailroom.myapi.website).  After l
 Download an application package for your system from [https://alexrusin.com/mailroom-clerk](https://alexrusin.com/mailroom-clerk/) or install the source code (described below).  Enter your API Key and connect. The key can be found by clicking on "Mailroom" in the header of Mairoom server. 
 When you click on "Routes" menu item, you can see all your created Hook URLs.  If you click on one of them, you will see a recorded HTTP request.  In the input field in the card footer you can specify URL you want this request to be sent to, including endpoints on your local machine/network.
 
-## Source code installation
+## Source Code Installation
 
 Mailroom Clerk is an open source application.
 
@@ -59,7 +59,7 @@ npm run start
 
 Start writing code.  When you save the application will get automatically rebuilt and reloaded.
 
-## Distribution package builds
+## Distribution Package Builds
 
 * Mailroom Clerk uses [electron-packager](https://github.com/electron-userland/electron-packager) to bundle the application's source code.
 
