@@ -6,7 +6,7 @@ Mailrom Tools (Mailroom server and Mailroom Clerk client) help you develop local
 ## Usage
 
 ### Step 1 (remote server)
-Create an account on [Mailroom server](https://mailroom.myapi.website).  After logging in, create a route.  Register "Hook URL" with a remote service that is going to send you WebHooks, or use an app for interacting with HTTP APIs, such as Postman, to send requests to created "Hook URL".
+Create an account on [Mailroom server](https://mailroom.myapi.website){:target="_blank"}.  After logging in, create a route.  Register "Hook URL" with a remote service that is going to send you WebHooks, or use an app for interacting with HTTP APIs, such as Postman, to send requests to created "Hook URL".
 
 ### Step 2 (local machine)
 Download an application package for your system from [https://alexrusin.com/mailroom-clerk](https://alexrusin.com/mailroom-clerk/) or install the source code (described below).  Enter your API Key and connect. The key can be found by clicking on "Mailroom" in the header of Mairoom server. 
