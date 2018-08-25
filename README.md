@@ -18,7 +18,7 @@ Mailroom Clerk is an open source application.
 
 ### Prerequisites
 
-* You have to have node an npm installed on your computer.
+* You have to have Node and NPM installed on your computer.
 
 ### Step 1
 
