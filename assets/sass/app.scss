@@ -57,3 +57,8 @@ button{
     opacity: 0;
 }
 
+/*=========================== Remove outline =========================*/
+.btn:focus, .btn.focus, .btn:active:focus, .btn:active.focus, .btn.active:focus, .btn.active.focus {
+  outline:0;
+}
+
