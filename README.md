@@ -1,7 +1,7 @@
 # Mailroom Clerk
 This is a client software for [Mailroom server](https://github.com/alexrusin/mailroom).
 
-Mailrom Tools (Mailroom server and Mailroom Clerk client) help you develop locally against WebHooks, HTTP callbacks from a remote server.
+Mailrom Tools (Mailroom server and Mailroom Clerk client) help you develop locally against web hooks, HTTP callbacks from a remote server.
 
 ## Usage
 
