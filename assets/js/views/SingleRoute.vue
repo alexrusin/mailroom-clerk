@@ -213,6 +213,9 @@
 			},
 
 			htmlResponse(data) {
+				if (typeof data !== 'string') {
+					return false;
+				}
 				data = data.trim();
 				return data.startsWith('<script>') || data.startsWith('<!doctype html>') || data.startsWith('<html') || data.startsWith('<!DOCTYPE html>');
 			}
