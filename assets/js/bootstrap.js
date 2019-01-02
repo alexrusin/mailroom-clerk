@@ -48,13 +48,14 @@ window.axios.defaults.headers.common['Accept'] = 'application/json';
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from 'laravel-echo'
+import Echo from 'laravel-echo'
 
-// window.Pusher = require('pusher-js');
+window.Pusher = require('pusher-js');
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: 'your-pusher-key',
-//     cluster: 'mt1',
-//     encrypted: true
-// });
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'websocketkey',
+    wsHost: '138.68.21.132',
+    wsPort: 6001,
+    disableStats: true,
+});

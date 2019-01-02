@@ -95,6 +95,10 @@
 	export default {
 		created() {
 			this.sendRequest(this.$route.params.id);
+			window.Echo.join(this.routePrefix + '-' + this.$route.params.id)
+				.listen('HookReceived', (event) => {
+                this.data = event;
+            });
 		},
 
 		computed: {
@@ -106,7 +110,7 @@
             	}
 
             },
-            ...mapState(['apiKey', 'targetUrl'])
+            ...mapState(['apiKey', 'targetUrl', 'routePrefix'])
 
         },
 
