@@ -56,6 +56,7 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: 'websocketkey',
     wsHost: '138.68.21.132',
+    authEndpoint: 'https://mailroom.myapi.website/broadcasting/auth',
     wsPort: 6001,
     disableStats: true,
 });

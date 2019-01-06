@@ -46,8 +46,8 @@
 		                        <div class="col-md-12">
 		                            <div class="text-left">
 		                                <form class="form-inline">
-
-				                            <input type="text" class="form-control input-width" id="sendToRoute" placeholder="Send to route" v-model="sendToRoute">
+										 
+				                           <input type="text" class="form-control input-width" id="sendToRoute" placeholder="Send to route" v-model="sendToRoute">
 
 				                           <button type="button" class="btn btn-primary" @click="makeRequest" id="send-request">
 				                           	 	<span class="buttonText">Send Request</span>
@@ -57,6 +57,11 @@
 				                           	 	<span class="buttonText">Sync Request</span>
                 								<span class="buttonLoadingImage hiddenButtonElement"></span>
 				                           </button>
+				                       		
+				                           	<div class="form-group">
+					                            <input type="checkbox" id="autoSyncAndSend" v-model="autoSyncAndSend">
+												<label for="checkbox">Auto sync and send request</label>
+											</div>
 				                        </form>
 		                            </div>
 		                        </div>
@@ -97,7 +102,11 @@
 			this.sendRequest(this.$route.params.id);
 			window.Echo.join(this.routePrefix + '-' + this.$route.params.id)
 				.listen('HookReceived', (event) => {
-                this.data = event;
+					if (this.autoSyncAndSend) {
+						this.data = event;
+						this.makeRequest();
+					}
+                
             });
 		},
 
@@ -123,6 +132,7 @@
 				requestResponse: '',
 				responseStatus: '',
 				isHtmlResponse: false,
+				autoSyncAndSend: false
 
 			};
 		},
@@ -229,6 +239,6 @@
 
 <style>
 	.input-width {
-		width: 70% !important;
+		width: 60% !important;
 	}
 </style>

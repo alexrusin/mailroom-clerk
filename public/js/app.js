@@ -5077,6 +5077,7 @@ window.Echo = new __WEBPACK_IMPORTED_MODULE_4_laravel_echo__["a" /* default */](
   broadcaster: 'pusher',
   key: 'websocketkey',
   wsHost: '138.68.21.132',
+  authEndpoint: 'https://mailroom.myapi.website/broadcasting/auth',
   wsPort: 6001,
   disableStats: true
 });
@@ -30035,7 +30036,7 @@ var Connector = function () {
             auth: {
                 headers: {}
             },
-            authEndpoint: 'http://mailroom.test/broadcasting/auth',
+            authEndpoint: '/broadcasting/auth',
             broadcaster: 'pusher',
             csrfToken: null,
             host: null,
@@ -40131,7 +40132,7 @@ exports = module.exports = __webpack_require__(13)(false);
 
 
 // module
-exports.push([module.i, "\n.input-key-width {\n    width: 60% !important;\n}\n", ""]);
+exports.push([module.i, "\n.input-key-width {\n    width: 60% !important;\n    margin-bottom: 1em;\n    margin-right: auto;\n    margin-left: auto;\n}\n", ""]);
 
 // exports
 
@@ -40724,7 +40725,7 @@ exports = module.exports = __webpack_require__(13)(false);
 
 
 // module
-exports.push([module.i, "\n.input-width {\n\twidth: 70% !important;\n}\n", ""]);
+exports.push([module.i, "\n.input-width {\n\twidth: 60% !important;\n}\n", ""]);
 
 // exports
 
@@ -40830,6 +40831,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -40838,7 +40844,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 		this.sendRequest(this.$route.params.id);
 		window.Echo.join(this.routePrefix + '-' + this.$route.params.id).listen('HookReceived', function (event) {
-			_this.data = event;
+			if (_this.autoSyncAndSend) {
+				_this.data = event;
+				_this.makeRequest();
+			}
 		});
 	},
 
@@ -40861,7 +40870,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 			sendToRoute: '',
 			requestResponse: '',
 			responseStatus: '',
-			isHtmlResponse: false
+			isHtmlResponse: false,
+			autoSyncAndSend: false
 
 		};
 	},
@@ -41137,7 +41147,57 @@ var render = function() {
                                   })
                                 ]
                               )
-                            : _vm._e()
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.autoSyncAndSend,
+                                  expression: "autoSyncAndSend"
+                                }
+                              ],
+                              attrs: {
+                                type: "checkbox",
+                                id: "autoSyncAndSend"
+                              },
+                              domProps: {
+                                checked: Array.isArray(_vm.autoSyncAndSend)
+                                  ? _vm._i(_vm.autoSyncAndSend, null) > -1
+                                  : _vm.autoSyncAndSend
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.autoSyncAndSend,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = null,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        (_vm.autoSyncAndSend = $$a.concat([
+                                          $$v
+                                        ]))
+                                    } else {
+                                      $$i > -1 &&
+                                        (_vm.autoSyncAndSend = $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1)))
+                                    }
+                                  } else {
+                                    _vm.autoSyncAndSend = $$c
+                                  }
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("label", { attrs: { for: "checkbox" } }, [
+                              _vm._v("Auto sync and send request")
+                            ])
+                          ])
                         ])
                       ])
                     ])
@@ -41228,8 +41288,8 @@ if (false) {
 /* harmony default export */ __webpack_exports__["a"] = ({
 
 	state: {
-		apiKey: 'apWw89sXzh8h3qodf2qbuDM8fdfJZ2avL9HtvSU04w4qS8EsJQDS3KbjsoVp',
-		targetUrl: 'http://mailroom.test',
+		apiKey: '',
+		targetUrl: 'https://mailroom.myapi.website',
 		routePrefix: '',
 		sendToRoutes: {}
 	},

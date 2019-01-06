@@ -73,5 +73,8 @@
 <style>
     .input-key-width {
         width: 60% !important;
+        margin-bottom: 1em;
+        margin-right: auto;
+        margin-left: auto;
     }
 </style>
