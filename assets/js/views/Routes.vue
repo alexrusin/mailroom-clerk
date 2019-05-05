@@ -37,7 +37,12 @@
                     }
                   }).then(response => {
                        this.routeComponents = response.data.data;
-                       this.message = '';
+                       if (this.routeComponents.length === 0) {
+                           this.message = 'You have no routes available.  Please visit https://mailroom.myapi.website to create routes';
+                       } else {
+                           this.message = '';
+                       }
+                       
 
                   }).catch(error => {
                         this.message = `Cant't retreieve routes at this time.  Please verify your credentials by entering your API Key`;
