@@ -59,4 +59,5 @@ window.Echo = new Echo({
     authEndpoint: 'https://mailroom.myapi.website/broadcasting/auth',
     wsPort: 6001,
     disableStats: true,
+    enabledTransports: ['ws', 'wss']
 });
