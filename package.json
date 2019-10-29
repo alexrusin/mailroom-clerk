@@ -25,7 +25,7 @@
   "author": "Alex Rusin",
   "license": "CC0-1.0",
   "devDependencies": {
-    "axios": "^0.17",
+    "axios": "^0.18",
     "bootstrap-sass": "^3.3.7",
     "cross-env": "^5.1",
     "electron": "^2.0.0",
